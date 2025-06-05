@@ -1,92 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Word-by-Word Reveal</title>
-  <style>
-    #skipButton {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 10px 20px;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      z-index: 999;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For My Inioluwa ❤️</title>
+<style>
+  body {
+    background: #fff0f6;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 40px;
+    color: #4b2c35;
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+  }
+  h1 {
+    color: #b22222;
+    font-size: 32px;
+  }
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 15px 0;
+  }
+  #hugBtn {
+    background: #d94f4f;
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 15px 50px;
+    border-radius: 40px;
+    font-size: 22px;
+    cursor: pointer;
+    margin-top: 40px;
+    box-shadow: 0 5px 15px rgba(217, 79, 79, 0.4);
+    transition: background-color 0.3s ease;
+  }
+  #hugBtn:hover {
+    background: #a03434;
+  }
+  #hugGif {
+    margin-top: 30px;
+    display: none;
+  }
+  #hugGif img {
+    max-width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(217, 79, 79, 0.6);
+  }
+  /* Confetti canvas */
+  #confetti-canvas {
+    position: fixed;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+  }
+  /* Music controls */
+  #musicControls {
+    margin-top: 30px;
+  }
+</style>
 </head>
 <body>
 
-  <button id="skipButton">Skip</button>
+<canvas id="confetti-canvas"></canvas>
 
-  <p>This is the first paragraph. It will appear word by word after a short delay.</p>
-  <p>Here's the second paragraph coming in with a dramatic entrance.</p>
-  <p>Finally, we finish with a third paragraph just for style.</p>
+<h1>My Dearest and most beautiful Inioluwa Adetunji Rebecca,</h1>
 
-  <script>
-    // Word-by-word reveal effect after 2 seconds
-    window.addEventListener('DOMContentLoaded', () => {
-      const paragraphs = document.querySelectorAll('p');
-      const delayBeforeStart = 2000; // 2 seconds
-      let paragraphIndex = 0;
-      let skip = false;
+<p>From the very moment you entered my life, everything changed—colors became brighter, laughter felt deeper, and every day carried a new kind of magic. It’s almost unbelievable how someone as incredible as you could walk into my world and light it up so effortlessly.</p>
 
-      // Hide all paragraphs initially
-      paragraphs.forEach(p => {
-        p.style.visibility = 'hidden';
-      });
+<p>inioluwa, you are not just my girlfriend—you are my best friend, my greatest support, and the most beautiful soul I have ever known. Your kindness, your smile, the way you listen and care, all of it makes me feel like the luckiest person alive. Sometimes I catch myself just staring, amazed by how perfect you are in your imperfections, and how much love you pour into everything you do.</p>
 
-      const skipButton = document.getElementById('skipButton');
-      skipButton.addEventListener('click', () => {
-        skip = true;
-        paragraphs.forEach(p => {
-          p.style.visibility = 'visible';
-          p.innerHTML = p.dataset.original;
-        });
-        clearInterval(currentInterval);
-      });
+<p>You inspire me every single day. Your strength and grace in the face of challenges remind me to be better, to push harder, and to love deeper. And when life tries to throw us curveballs, knowing I have you by my side makes everything feel possible. It’s like together we become unstoppable—a team that no storm can break.</p>
 
-      // Store original text in data attribute for later reset
-      paragraphs.forEach(p => {
-        p.dataset.original = p.textContent;
-      });
+<p>I want you to know this isn’t just a fleeting feeling. What I feel for you runs so deep that words often fail me. But I’ll keep trying, because you deserve to hear it over and over. I love you for who you are, for the dreams you hold, for the laughter we share, and even for the quiet moments when just being near you feels like home.</p>
 
-      let currentInterval;
+<p>Thank you for being you—so wonderfully, beautifully you. I promise to always cherish you, protect you, and celebrate you every day. My heart is yours, Inioluwa, and it always will be.</p>
 
-      setTimeout(() => {
-        if (!skip) revealNextParagraph();
-      }, delayBeforeStart);
+<p>And I promise that I will make more effort in making you happy.</p>
 
-      function revealNextParagraph() {
-        if (paragraphIndex >= paragraphs.length || skip) return;
+<p>With all my love,<br/><strong>AISIRI CONQUEST SAMUEL</strong></p>
 
-        const p = paragraphs[paragraphIndex];
-        const words = p.dataset.original.split(' ');
-        p.innerHTML = ''; // Clear existing text
-        p.style.visibility = 'visible';
+<p><em>P.S. I built this website just for you to show how much you mean to me.</em></p>
 
-        let wordIndex = 0;
+<!-- Hug button -->
+<button id="hugBtn">Hug me 🤗</button>
 
-        currentInterval = setInterval(() => {
-          if (skip) {
-            clearInterval(currentInterval);
-            return;
-          }
+<!-- Hug gif -->
+<div id="hugGif">
+  <img src="hug-animation.gif" alt="Hug animation" />
+</div>
 
-          if (wordIndex < words.length) {
-            p.innerHTML += words[wordIndex] + ' ';
-            wordIndex++;
-          } else {
-            clearInterval(currentInterval);
-            paragraphIndex++;
-            setTimeout(revealNextParagraph, 500); // small pause before next paragraph
-          }
-        }, 100); // speed of word reveal
-      }
-    });
-  </script>
+<!-- Music controls -->
+<div id="musicControls">
+  <audio id="bgMusic" src="background-music.mp3" loop></audio>
+  <button id="musicBtn" style="padding: 10px 20px; font-size: 16px; margin-top: 10px;">Play Music</button>
+</div>
+
+<script>
+// Confetti effect (simple)
+const confettiCanvas = document.getElementById('confetti-canvas');
+const ctx = confettiCanvas.getContext('2d');
+confettiCanvas.width = window.innerWidth;
+confettiCanvas.height = window.innerHeight;
+
+let confettiPieces = [];
+const colors = ['#d94f4f', '#f08080', '#f4a6a6', '#c0392b', '#e74c3c'];
+
+function randomRange(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+class ConfettiPiece {
+  constructor() {
+    this.x = randomRange(0, confettiCanvas.width);
+    this.y = randomRange(-confettiCanvas.height, 0);
+    this.size = randomRange(7, 15);
+    this.speed = randomRange(1, 3);
+    this.color = colors[Math.floor(randomRange(0, colors.length))];
+    this.angle = randomRange(0, 2 * Math.PI);
+    this.spin = randomRange(0.01, 0.03);
+  }
+  update() {
+    this.y += this.speed;
+    this.angle += this.spin;
+    if (this.y > confettiCanvas.height) {
+      this.y = randomRange(-confettiCanvas.height, 0);
+      this.x = randomRange(0, confettiCanvas.width);
+    }
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+    ctx.fillStyle = this.color;
+    ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size/2);
+    ctx.restore();
+  }
+}
+
+for(let i=0; i<150; i++) {
+  confettiPieces.push(new ConfettiPiece());
+}
+
+function animateConfetti() {
+  ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+  confettiPieces.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animateConfetti);
+}
+
+animateConfetti();
+
+// Hug button logic
+const hugBtn = document.getElementById('hugBtn');
+const hugGif = document.getElementById('hugGif');
+hugBtn.addEventListener('click', () => {
+  if(hugGif.style.display === 'none' || hugGif.style.display === '') {
+    hugGif.style.display = 'block';
+    hugBtn.textContent = 'Hug sent! ❤️';
+    setTimeout(() => {
+      hugGif.style.display = 'none';
+      hugBtn.textContent = 'Hug me 🤗';
+    }, 6000);
+  }
+});
+
+// Music play/pause logic
+const music = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+
+musicBtn.addEventListener('click', () => {
+  if(music.paused) {
+    music.play();
+    musicBtn.textContent = 'Pause Music';
+  } else {
+    music.pause();
+    musicBtn.textContent = 'Play Music';
+  }
+});
+</script>
+
 </body>
 </html>
