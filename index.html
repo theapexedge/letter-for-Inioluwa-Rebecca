@@ -111,8 +111,21 @@
   <!-- Initial Button -->
   <button id="sorryButton" class="button">I’m Sorry 😞</button>
 
-  <!-- Apology Message -->
-  <p id="apologyMessage" class="hidden">I know I messed up. I truly am sorry... and I miss you more than words can say 😢</p>
+  <div id="apologyMessage" class="hidden" style="max-width: 600px; text-align: center;">
+  <p>Hey babe, I know I get angry too quickly, and I know it’s bad. I’m already working on changing that.</p>
+
+  <p>Most times, all I want is just direct communication from you. I have trust issues, and I’m learning to let go of them little by little.</p>
+
+  <p>I’m just human, and sometimes my thoughts get the better of me. They cloud my judgment and make me react negatively. 😢</p>
+
+  <p>I’m sorry about last night, and I promise to do better.</p>
+
+  <p>You’re the most beautiful and the world’s most amazing girlfriend a man could ever ask for. Thank you for coming into my life and brightening it up.</p>
+
+  <p>You’re a gift I will forever cherish. 💖🎁</p>
+
+  <p>I hope you had a good sleep. GOOD MORNING MY LOVE ❤️</p>
+</div>
 
   <!-- Hug Button -->
   <button id="hugButton" class="button hidden">Hug Me ❤️</button>
@@ -123,8 +136,15 @@
   <!-- Gift Button -->
   <button id="giftButton" class="button hidden">🎁 Gift</button>
 
-  <!-- Final Message -->
-  <p id="finalMessage" class="hidden">Here’s ₦5,000 to cheer you up. Let’s go buy your favorite shawarma and talk about everything 💖</p>
+  <div id="finalMessage" class="hidden" style="max-width: 600px; text-align: center;">
+  <p>Here’s ₦5,000 to cheer you up.</p>
+
+  <p>Please help me manage it. 🙏</p>
+
+  <p>You can use it to get something for yourself — maybe shawarma, ice cream, or whatever makes you smile. 😊</p>
+
+  <p>I love you so much. 💖</p>
+</div>
 
   <!-- JavaScript Logic -->
   <script>
@@ -177,11 +197,6 @@
       // Show hug GIF
       hugGif.classList.remove("hidden");
       hugGif.classList.add("fade-in");
-
-      // Hide hug GIF after 4 seconds
-      setTimeout(() => {
-        hugGif.classList.add("hidden");
-      }, 4000);
 
       // Show Gift button after delay
       setTimeout(() => {
