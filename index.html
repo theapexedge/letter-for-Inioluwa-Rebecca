@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I’m So Sorry 💔</title>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
-    /* General Reset and Emotional Styling */
+    /* --- Reset & Base --- */
     body {
       margin: 0;
       padding: 0;
@@ -17,15 +21,17 @@
       align-items: center;
       flex-direction: column;
       overflow: hidden;
-      transition: background 1s ease;
       position: relative;
+      transition: background 1s ease;
     }
 
     h1, p {
       margin: 0;
       padding: 0;
+      text-align: center;
     }
 
+    /* --- Button Styling --- */
     .button {
       padding: 12px 30px;
       font-size: 18px;
@@ -44,6 +50,7 @@
       transform: scale(1.05);
     }
 
+    /* --- Hidden & Animation Classes --- */
     .hidden {
       display: none;
     }
@@ -57,11 +64,7 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    #apologyMessage, #hugButton, #giftButton, #finalMessage {
-      opacity: 0;
-    }
-
-    /* Rain Overlay Effect */
+    /* --- Rain Styling --- */
     .rain {
       position: fixed;
       top: 0;
@@ -75,9 +78,10 @@
 
     .raindrop {
       position: absolute;
-      width: 2px;
-      height: 18px;
-      background: rgba(255, 255, 255, 0.4);
+      width: 4px;
+      height: 25px;
+      background: rgba(0, 115, 255, 0.6);
+      border-radius: 2px;
       animation: fall linear infinite;
     }
 
@@ -85,41 +89,70 @@
       0% { transform: translateY(-100px); }
       100% { transform: translateY(110vh); }
     }
+
+    /* --- Hug Image --- */
+    #hugGif {
+      width: 220px;
+      margin-top: 25px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Rain Overlay -->
   <div class="rain" id="rainContainer"></div>
 
+  <!-- Background Music (autoplays and loops) -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="background-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Initial Button -->
   <button id="sorryButton" class="button">I’m Sorry 😞</button>
 
+  <!-- Apology Message -->
   <p id="apologyMessage" class="hidden">I know I messed up. I truly am sorry... and I miss you more than words can say 😢</p>
+
+  <!-- Hug Button -->
   <button id="hugButton" class="button hidden">Hug Me ❤️</button>
+
+  <!-- Hugging GIF -->
+  <img id="hugGif" src="hug-animation.gif" class="hidden" alt="Hug Animation" />
+
+  <!-- Gift Button -->
   <button id="giftButton" class="button hidden">🎁 Gift</button>
+
+  <!-- Final Message -->
   <p id="finalMessage" class="hidden">Here’s ₦5,000 to cheer you up. Let’s go buy your favorite shawarma and talk about everything 💖</p>
 
+  <!-- JavaScript Logic -->
   <script>
     const sorryBtn = document.getElementById("sorryButton");
     const apologyMsg = document.getElementById("apologyMessage");
     const hugBtn = document.getElementById("hugButton");
     const giftBtn = document.getElementById("giftButton");
     const finalMsg = document.getElementById("finalMessage");
+    const hugGif = document.getElementById("hugGif");
     const rainContainer = document.getElementById("rainContainer");
 
-    // Function to start rain
+    // 💧 Start Rain Effect
     function startRainEffect() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 120; i++) {
         const drop = document.createElement('div');
         drop.classList.add('raindrop');
         drop.style.left = Math.random() * window.innerWidth + 'px';
-        drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
-        drop.style.animationDelay = Math.random() * 5 + 's';
+        drop.style.animationDuration = (Math.random() * 0.3 + 0.7) + 's';
+        drop.style.animationDelay = Math.random() * 4 + 's';
         rainContainer.appendChild(drop);
       }
     }
 
-    // Button sequence logic
+    // 😞 First Button Click
     sorryBtn.addEventListener("click", () => {
       startRainEffect();
+
+      // Hide initial button
       sorryBtn.style.display = "none";
 
       // Show apology message
@@ -127,7 +160,7 @@
       apologyMsg.classList.add("fade-in");
       apologyMsg.style.opacity = 1;
 
-      // Then show hug button after a delay
+      // Show Hug Button after delay
       setTimeout(() => {
         hugBtn.classList.remove("hidden");
         hugBtn.classList.add("fade-in");
@@ -135,21 +168,45 @@
       }, 2000);
     });
 
+    // 🤗 Hug Button Click
     hugBtn.addEventListener("click", () => {
+      // Hide previous elements
       apologyMsg.style.display = "none";
       hugBtn.style.display = "none";
 
-      giftBtn.classList.remove("hidden");
-      giftBtn.classList.add("fade-in");
-      giftBtn.style.opacity = 1;
+      // Show hug GIF
+      hugGif.classList.remove("hidden");
+      hugGif.classList.add("fade-in");
+
+      // Hide hug GIF after 4 seconds
+      setTimeout(() => {
+        hugGif.classList.add("hidden");
+      }, 4000);
+
+      // Show Gift button after delay
+      setTimeout(() => {
+        giftBtn.classList.remove("hidden");
+        giftBtn.classList.add("fade-in");
+        giftBtn.style.opacity = 1;
+      }, 2000);
     });
 
+    // 🎁 Gift Button Click
     giftBtn.addEventListener("click", () => {
       giftBtn.style.display = "none";
 
+      // Show final message
       finalMsg.classList.remove("hidden");
       finalMsg.classList.add("fade-in");
       finalMsg.style.opacity = 1;
+
+      // Launch confetti
+      confetti({
+        particleCount: 200,
+        spread: 120,
+        origin: { y: 0.6 },
+        scalar: 1.2
+      });
     });
   </script>
 </body>
