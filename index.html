@@ -1,218 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I'm Sorry 💔</title>
   <style>
     body {
-      margin: 0;
-      padding: 40px 20px;
-      background: linear-gradient(to bottom right, #fff0f5, #ffe4e1);
-      font-family: "Segoe UI", sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff0f3;
       text-align: center;
-      color: #333;
-      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    .message {
+      max-width: 600px;
+      margin: 20px auto;
+      font-size: 1.2rem;
+      line-height: 1.7;
     }
 
     button {
-      padding: 14px 28px;
-      font-size: 20px;
-      border: none;
-      border-radius: 8px;
-      background-color: #ff8a80;
+      background-color: #ff85a2;
       color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 25px;
       cursor: pointer;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transition: all 1s ease;
+      transition: background 0.3s ease;
     }
 
     button:hover {
-      background-color: #ff5252;
+      background-color: #ff5d89;
     }
 
-    #startButton,
-    #hugButton,
-    #giftButton {
+    .center {
+      text-align: center;
       margin-top: 20px;
     }
 
-    #hugButton, #giftButton {
+    #hugGif {
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
       display: none;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,82,82,0.4); }
-      70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255,82,82,0); }
-      100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,82,82,0); }
-    }
-
-    #letter {
-      display: none;
-      margin-top: 40px;
-    }
-
-    #letter p {
-      font-size: 22px;
-      max-width: 720px;
-      margin: 40px auto;
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    .fade-in {
-      animation: fadeInUp 1s forwards;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .word {
-      opacity: 0;
-      display: inline-block;
-      animation: wordFade 0.6s forwards;
-    }
-
-    @keyframes wordFade {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
     }
 
     #giftReveal {
       display: none;
-      margin-top: 40px;
-      font-size: 24px;
-      max-width: 700px;
-      margin-inline: auto;
-      padding: 30px;
-      border-radius: 16px;
-      background-color: #fffaf0;
-      color: #444;
-      box-shadow: 0 0 25px rgba(255, 153, 153, 0.2);
-      animation: revealGift 1s ease-in-out forwards;
-      transform: scale(0.8);
-      opacity: 0;
+      animation: fadeIn 1.5s ease-in-out;
+      margin-top: 30px;
     }
 
-    @keyframes revealGift {
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* Music toggle button styling */
+    #musicToggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      font-size: 1rem;
+      background-color: #ff85a2;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
 
-  <!-- Step 1: Initial Apology Button -->
-  <button id="startButton">I’m Sorry 😔</button>
+  <audio id="bgMusic" autoplay loop>
+    <source src="background-music.mp3" type="audio/mp3" />
+  </audio>
 
-  <!-- Step 2: The Apology Letter -->
-  <div id="letter">
-    <p>I know I’ve made mistakes, and I carry the weight of them every day. I never wanted to cause you pain.</p>
-    <p>Sometimes I struggle to find the right words, but if there’s one thing I know—it’s that you matter to me. So deeply.</p>
-    <p>You’re the thought that stays with me in silence, the presence I feel even in your absence.</p>
-    <p>All I want is to make things right. I’m not perfect… but my feelings are real, and so is this apology.</p>
+  <div class="message">
+    <p>Hey love,</p>
+    <p>I know I messed up... and you have every right to be mad.</p>
+    <p>But I want you to know that you mean the world to me.</p>
+    <p>I’m not perfect, but I promise to always try for you, for us.</p>
+    <p>Can I show you how much you matter to me?</p>
   </div>
 
-  <!-- Step 3: Hug Button -->
-  <button id="hugButton">Hug Me ❤️</button>
+  <div class="center">
+    <button id="sorryBtn">I'm sorry 😞</button>
+  </div>
 
-  <!-- Step 4: Gift Button -->
-  <button id="giftButton">Open Gift 🎁</button>
+  <div class="center" style="margin-top: 30px;">
+    <button id="hugMeBtn">Hug me 🤗</button>
+  </div>
 
-  <!-- Step 5: Gift Reveal -->
+  <img id="hugGif" src="hug-animation.gif" alt="Hug Animation" />
+
+  <div class="center" style="margin-top: 40px;">
+    <button id="giftBtn">🎁 Gift</button>
+  </div>
+
   <div id="giftReveal">
-    <h3>🎉 Surprise!</h3>
-    <p>I sent you ₦5,000 to your account. Please check it, my love. I hope it brings a small smile to your face today. 💖</p>
+    <h2 style="color: green; font-size: 2rem;">🎉 Surprise!</h2>
+    <p style="font-size: 1.4rem;">I just sent you ₦5,000 to your account 😘</p>
   </div>
+
+  <!-- Music Toggle Button -->
+  <button id="musicToggle">🔊 Pause Music</button>
 
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const startButton = document.getElementById('startButton');
-      const letter = document.getElementById('letter');
-      const paragraphs = letter.querySelectorAll('p');
-      const hugButton = document.getElementById('hugButton');
-      const giftButton = document.getElementById('giftButton');
-      const giftReveal = document.getElementById('giftReveal');
-      let paragraphIndex = 0;
+    document.getElementById("hugMeBtn").addEventListener("click", function () {
+      document.getElementById("hugGif").style.display = "block";
+    });
 
-      // Start button appears after short delay
-      setTimeout(() => {
-        startButton.style.opacity = '1';
-      }, 1000);
+    document.getElementById("giftBtn").addEventListener("click", function () {
+      const gift = document.getElementById("giftReveal");
+      gift.style.display = "block";
+    });
 
-      startButton.addEventListener('click', () => {
-        startButton.style.opacity = '0';
-        setTimeout(() => {
-          startButton.style.display = 'none';
-          letter.style.display = 'block';
-          revealNextParagraph();
-        }, 1000);
-      });
+    // Music toggle logic
+    const music = document.getElementById("bgMusic");
+    const toggleBtn = document.getElementById("musicToggle");
 
-      function revealNextParagraph() {
-        if (paragraphIndex >= paragraphs.length) {
-          hugButton.style.display = 'inline-block';
-          setTimeout(() => {
-            hugButton.style.opacity = '1';
-          }, 400);
-          return;
-        }
-
-        const p = paragraphs[paragraphIndex];
-        const words = p.textContent.split(' ');
-        p.innerHTML = '';
-        p.classList.add('fade-in');
-
-        words.forEach((word, i) => {
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.style.animationDelay = `${i * 100}ms`;
-          span.textContent = word + ' ';
-          p.appendChild(span);
-        });
-
-        setTimeout(() => {
-          paragraphIndex++;
-          revealNextParagraph();
-        }, words.length * 100 + 800);
+    toggleBtn.addEventListener("click", () => {
+      if (music.paused) {
+        music.play();
+        toggleBtn.innerHTML = "🔊 Pause Music";
+      } else {
+        music.pause();
+        toggleBtn.innerHTML = "🔇 Play Music";
       }
-
-      hugButton.addEventListener('click', () => {
-        hugButton.style.opacity = '0';
-        setTimeout(() => {
-          hugButton.style.display = 'none';
-          giftButton.style.display = 'inline-block';
-          setTimeout(() => {
-            giftButton.style.opacity = '1';
-          }, 200);
-        }, 800);
-      });
-
-      giftButton.addEventListener('click', () => {
-        giftButton.style.opacity = '0';
-        setTimeout(() => {
-          giftButton.style.display = 'none';
-          giftReveal.style.display = 'block';
-        }, 800);
-      });
     });
   </script>
 </body>
